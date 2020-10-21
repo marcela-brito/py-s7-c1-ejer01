@@ -1,6 +1,18 @@
 from prettytable import PrettyTable
 import pymysql
 
+"""
+1. identificar cada parte de lo que esta en el codigo
+
+"""
+
+"""
+connection = pymysql.connect(
+
+esta creando la conexion entre mi programa python con la base de datos
+mysql vean que se tiene los datos de conexion host, user, passwrd, el
+eschema o la base de datos
+"""
 connection = pymysql.connect(
     host="localhost",
     user="root",
@@ -9,8 +21,17 @@ connection = pymysql.connect(
     cursorclass=pymysql.cursors.DictCursor,
 )
 
+"""
+def getAllClients():
+este es un metodo de este archivo que se encarga de traer todos 
+los clientes de nuestra tabla cliente, colocarlos en una prettytable
+y luego desplegarlos
+"""
+
 
 def getAllClients():
+    # con la conexion y sql va a traer todos los datos y los guarda en
+    # una variable llamada result
     result = {}
     try:
         with connection.cursor() as cursor:
@@ -19,11 +40,16 @@ def getAllClients():
             result = cursor.fetchall()
     finally:
         pass
+    # crea un objeto pretty table y le genera los encabezados de la tabla
     table = PrettyTable()
     table.field_names = ["Id", "Name", "Age", "Email"]
+    # for medio del for saco todos los cliente y los voy ingresando
+    # a la pretty table
     for client in result:
         table.add_row([client["id"], client["name"], client["age"], client["email"]])
+    # imprimo la prettytable
     print(table)
+    # luego limpiamos la tabla
     table.clear()
 
 

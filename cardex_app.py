@@ -23,7 +23,7 @@ connection = pymysql.connect(
 
 """
 def getAllClients():
-este es un metodo de este archivo que se encarga de traer todos 
+este es un metodo de este archivo que se encarga de traer todos
 los clientes de nuestra tabla cliente, colocarlos en una prettytable
 y luego desplegarlos
 """
@@ -53,19 +53,42 @@ def getAllClients():
     table.clear()
 
 
+"""
 def addNewClient():
+este metodo se encarga de colocar un nuevo cliente a la base de datos por esa razon
+comienza pidiendo al usuario la informacion del cliente.
+luego genera el insert en transql y lo corre en la base de datos
+al final manda a llamar al metodo getAllClients para mostrar la adicion
+"""
+
+
+def addNewClient():
+    # obtener informacion del cliente del usuario
     print("add a new client...")
     name = input("name: ")
     age = int(input("age: "))
     email = input("email: ")
+    # se ocupa la conexion para insertar el registro en la base de datos
+    # con el insert
     try:
         with connection.cursor() as cursor:
             sql = f"insert into cardexdb.client(name, age, email) values('{name}', {age}, '{email}');"
             cursor.execute(sql)
+            # cuando hago inserts, update o deletes, create
             connection.commit()
     finally:
         pass
     getAllClients()
+
+
+"""
+def updateClient():
+este metodo hara la actualizacion de un dato en la base de datos
+primero debemos saber el id del cliente que vamos a actualizar
+segundo debemos saber que columna vamos a modificar
+luego debo dar la informacion nueva
+al manda a llamar el metodo getAllClients para ver la tabla
+"""
 
 
 def updateClient():
@@ -108,6 +131,13 @@ def updateClient():
     finally:
         pass
     getAllClients()
+
+
+"""
+def deleteClient():
+este metodo se encarga de borrar un cliente de la base de datos
+necesitamos del usuario el id de cliente a borrar
+"""
 
 
 def deleteClient():

@@ -8,12 +8,14 @@ from database import (
     deleteClientDB,
 )
 
+# este comentario es solo una prueba
 """
 def getAllClients():
 este es un metodo de este archivo que se encarga de traer todos
 los clientes de nuestra tabla cliente, colocarlos en una prettytable
 y luego desplegarlos
 """
+# holaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
 def getAllClients():
